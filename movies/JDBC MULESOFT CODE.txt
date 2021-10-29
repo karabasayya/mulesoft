@@ -1,0 +1,44 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TestApplication {
+   static final String DB_URL = "jdbc:mysql://localhost/MOVIES";
+   static final String USER = "guest";
+   static final String PASS = "guest123";
+
+   public static void main(String[] args) {
+      // Open a connection
+      try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+         Statement stmt = conn.createStatement();
+      ) {		      
+          String sql = "CREATE TABLE MOVIES " +(
+  `name` varchar(255) NOT NULL,
+  `actor` varchar(50) NOT NULL,
+  `actress` varchar(50) NOT NULL,
+  `director` varchar(20) NOT NULL,
+  `year of release` int(100) NOT NULL,
+  
+)
+
+         stmt.executeUpdate(sql);
+         System.out.println("Created table in given database...");   
+
+System.out.println("Inserting records into the table...");          
+         String sql = "INSERT INTO MOVIES VALUES ('titanic', 'Leonardo DiCaprio', 'Kate Winslet', ' James Cameron', 1997)";
+         stmt.executeUpdate(sql);
+         sql = "INSERT INTO MOVIES VALUES ('parasite', 'park se-joon', 'cho ye jong', 'beng jee ho', 2019)";
+         stmt.executeUpdate(sql);
+         sql = "INSERT INTO MOVIES VALUES ('masterpiece', 'yash', 'shanvi shrivatsav', 'manju', 2015)";
+         stmt.executeUpdate(sql);
+         sql = "INSERT INTO MOVIES VALUES('super', 'upendra', 'priyanka', 'upendra', 2010)";
+         stmt.executeUpdate(sql);
+          sql = "INSERT INTO MOVIES VALUES('shershaah', 'sidarth malhotra', 'kaira advani', 'vishnuvardhan', 2021)";
+         stmt.executeUpdate(sql);
+         System.out.println("Inserted records into the table..."); 	  
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
+}
